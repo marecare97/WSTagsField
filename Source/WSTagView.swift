@@ -10,7 +10,8 @@ import UIKit
 
 open class WSTagView: UIView, UITextInputTraits {
 
-    fileprivate let textLabel = UILabel()
+    fileprivate let textLabel = UILabel
+    fileprivate let clearButton = UIButton()
 
     open var displayText: String = "" {
         didSet {
@@ -116,7 +117,22 @@ open class WSTagView: UIView, UITextInputTraits {
         textLabel.font = font
         textLabel.textColor = .white
         textLabel.backgroundColor = .clear
+        
+        clearButton.frame = CGRect(x: layoutMargins.left, y: layoutMargins.top, width: 0, height: 0)
+        clearButton.backgroundColor = .clear
+        clearButton.setTitle("x", for: .normal)
+        clearButton.setTitleColor(.black, for: .normal)
+        clearButton.layer.cornerRadius = 5
+        clearButton.sizeToFit()
+        clearButton.titleLabel?.font =  UIFont(name: "", size: 10)
+        clearButton.addTarget(self, action: #selector(pressed), for: .touchUpInside)
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(textLabel)
+        addSubview(clearButton)
+        
+        clearButton.centerYAnchor.constraint(equalTo: textLabel.centerYAnchor, constant: -1).isActive = true
+        clearButton.trailingAnchor.constraint(equalTo: textLabel.trailingAnchor, constant: 10).isActive = true
 
         self.displayText = tag.text
         updateLabelText()
@@ -166,7 +182,7 @@ open class WSTagView: UIView, UITextInputTraits {
 
     open override var intrinsicContentSize: CGSize {
         let labelIntrinsicSize = textLabel.intrinsicContentSize
-        return CGSize(width: labelIntrinsicSize.width + layoutMargins.left + layoutMargins.right,
+        return CGSize(width: labelIntrinsicSize.width + layoutMargins.left + layoutMargins.right + 12,
                       height: labelIntrinsicSize.height + layoutMargins.top + layoutMargins.bottom)
     }
 
@@ -229,6 +245,10 @@ open class WSTagView: UIView, UITextInputTraits {
             return
         }
         onDidRequestSelection?(self)
+    }
+    
+     @objc func pressed() {
+        onDidRequestDelete?(self, nil)
     }
 
 }
