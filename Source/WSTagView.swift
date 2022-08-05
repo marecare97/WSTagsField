@@ -10,7 +10,7 @@ import UIKit
 
 open class WSTagView: UIView, UITextInputTraits {
 
-    fileprivate let textLabel = UILabel
+    fileprivate let textLabel = UILabel()
     fileprivate let clearButton = UIButton()
 
     open var displayText: String = "" {
