@@ -740,7 +740,7 @@ extension WSTagsField {
         textField.isHidden = !textField.isEnabled
 
         invalidateIntrinsicContentSize()
-        let newIntrinsicContentHeight = intrinsicContentSize.height + 10
+        let newIntrinsicContentHeight = intrinsicContentSize.height + 30
 
         if constraints.isEmpty {
             frame.size.height = newIntrinsicContentHeight.rounded()
