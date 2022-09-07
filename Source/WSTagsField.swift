@@ -754,7 +754,7 @@ extension WSTagsField {
         }
 
         if self.enableScrolling {
-            self.isScrollEnabled = contentRect.height + 15 + contentInset.top + contentInset.bottom > newIntrinsicContentHeight
+            self.isScrollEnabled = contentRect.height + 50 + contentInset.top + contentInset.bottom > newIntrinsicContentHeight
         }
         self.contentSize.width = self.bounds.width - contentInset.left - contentInset.right
         self.contentSize.height = contentRect.height
